@@ -1,42 +1,37 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React from 'react';
+import { Button } from '../components/Button';
+import { Card } from '../components/Card';
+import { Form } from '../components/Form';
+import { UserInfo } from '../components/UserInfo';
 
 function UserInfoPage() {
   return (
-    <div>
-      <h1>User Information</h1>
-      <form>
-        <fieldset>
-          <dl>
-            <dt>id</dt>
-            <dd>1</dd>
-          </dl>
-          <dl>
-            <dt>name</dt>
-            <dd>야옹이</dd>
-          </dl>
-          <dl>
-            <dt>account</dt>
-            <dd>imcat</dd>
-          </dl>
-          <dl>
-            <dt>level</dt>
-            <dd>1</dd>
-          </dl>
-          <button>Logout</button>
-        </fieldset>
-      </form>
-    </div>
+    <div className="wrapper" css={loginBackgroundStyle}>
+      <Card>
+        <Card.Title>User Information</Card.Title>
+        <Form>
+          <UserInfo title="id" value="1" />
+          <UserInfo title="name" value="야옹이" />
+          <UserInfo title="account" value="imcat" />
+          <UserInfo title="level" value="1" />
 
-    // <Card>
-    //   <Form>
-    //     <UserInfo dt="" dd="" />
-    //     <UserInfo dt="" dd="" />
-    //     <UserInfo dt="" dd="" />
-    //     <UserInfo dt="" dd="" />
-    //     <Button>Logout</Button>
-    //   </Form>
-    // </Card>
+          <Button type="button" color="yellow">
+            Logout
+          </Button>
+        </Form>
+      </Card>
+    </div>
   );
 }
+
+const loginBackgroundStyle = css`
+  background-color: coral;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default UserInfoPage;
