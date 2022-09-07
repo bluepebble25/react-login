@@ -4,10 +4,15 @@ import React from 'react';
 
 interface FormProps {
   children: React.ReactNode;
+  onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
-function Form({ children }: FormProps) {
-  return <form css={FormStyle}>{children}</form>;
+function Form({ children, onSubmit }: FormProps) {
+  return (
+    <form css={FormStyle} onSubmit={onSubmit}>
+      {children}
+    </form>
+  );
 }
 
 const FormStyle = css``;
