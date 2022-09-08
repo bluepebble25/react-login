@@ -5,7 +5,13 @@ const instance = axios.create({
 });
 
 const token = sessionStorage.getItem('accessToken');
-
 instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+instance.interceptors.request.use(function (config) {
+  const token = sessionStorage.getItem('accessToken');
+  config!.headers!.Authorization = `Bearer ${token}`;
+
+  return config;
+});
 
 export default instance;
