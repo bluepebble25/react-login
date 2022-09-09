@@ -9,10 +9,11 @@ import { Input } from '../components/Input';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { AuthApi } from '../lib/api/auth';
 import { useNavigate } from 'react-router-dom';
+import { AxiosError, AxiosResponse } from 'axios';
 
 function LoginPage() {
   const [loginInfo, setLoginInfo] = useState({ account: '', password: '' });
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,11 +31,15 @@ function LoginPage() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const result = await AuthApi.login(loginInfo.account, loginInfo.password);
-      console.log('result', result);
+      await AuthApi.login(loginInfo.account, loginInfo.password);
       navigate('/userinfo');
     } catch (e) {
-      console.log(e);
+      const err = e as AxiosError;
+      const res = err.response as AxiosResponse;
+      const message = res.data.message;
+      setError(message);
+      console.log(err);
+      console.log(err.response);
     }
   };
 
@@ -63,7 +68,7 @@ function LoginPage() {
             <input type="checkbox" />
             Remember me
           </label>
-          {error && <ErrorMessage>Incorrect ID or password</ErrorMessage>}
+          {error && <ErrorMessage>{error}</ErrorMessage>}
           <Button type="submit" color="blue">
             Login
           </Button>
