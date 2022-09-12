@@ -65,7 +65,7 @@ function UserInfoPage() {
 }
 
 const loginBackgroundStyle = css`
-  background-color: coral;
+  background: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
   height: 100vh;
   display: flex;
   justify-content: center;

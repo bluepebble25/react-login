@@ -17,8 +17,8 @@ class Palette {
     this.yellow = '#FFD93D';
     this.green = '#6BCB77';
     this.darkgreen = '#1B5E20';
-    this.grey = '';
-    this.lightgrey = '';
+    this.grey = '#75767B';
+    this.lightgrey = '#C1C2C7';
   }
 }
 

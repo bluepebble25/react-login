@@ -20,11 +20,14 @@ function Button({ type, color, children }: ButtonProps) {
 }
 
 const ButtonStyle = (color: buttonColorType) => css`
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: ${palette[color]};
   font-size: 20px;
   font-weight: 500px;
   color: ${palette.white};
-  background-color: ${palette[color]};
-  border: none;
   cursor: pointer;
 `;
 

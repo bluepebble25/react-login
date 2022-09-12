@@ -64,8 +64,8 @@ function LoginPage() {
               onChange={onChange}
             />
           </div>
-          <label style={{ display: 'block' }}>
-            <input type="checkbox" />
+          <label css={labelStyle}>
+            <input type="checkbox" style={{ margin: '0 5px 0 0' }} />
             Remember me
           </label>
           {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -79,11 +79,16 @@ function LoginPage() {
 }
 
 const loginBackgroundStyle = css`
-  background-color: coral;
+  background: linear-gradient(115deg, #56d8e4 10%, #9f01ea 90%);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const labelStyle = css`
+  display: inline-block;
+  margin: 10px 0 10px 0;
 `;
 
 export default LoginPage;

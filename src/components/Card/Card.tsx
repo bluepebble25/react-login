@@ -13,8 +13,11 @@ function CardMain({ children }: CardProps) {
 }
 
 const cardStyle = css`
-  background-color: ${palette.white};
+  width: 365px;
   padding: 30px;
+  border-radius: 5px;
+  background-color: ${palette.white};
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
 `;
 
 const Card = Object.assign(CardMain, {
