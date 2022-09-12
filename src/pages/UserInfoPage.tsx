@@ -33,10 +33,9 @@ function UserInfoPage() {
   const getUserInfo = async () => {
     try {
       const res = await AuthApi.getUserInfo();
-      console.log(res.data);
       setUserInfo(res.data);
     } catch (e) {
-      console.log(e);
+      alert(e);
     }
   };
 

@@ -21,6 +21,7 @@ function Input({ type, name, placeholder, icon, onChange }: InputProps) {
         placeholder={placeholder}
         onChange={onChange}
         css={inputStyle}
+        {...(type === 'password' && { autoComplete: 'on' })}
       />
       {icon && (
         <span css={iconStyle}>

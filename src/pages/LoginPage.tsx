@@ -38,8 +38,6 @@ function LoginPage() {
       const res = err.response as AxiosResponse;
       const message = res.data.message;
       setError(message);
-      console.log(err);
-      console.log(err.response);
     }
   };
 
