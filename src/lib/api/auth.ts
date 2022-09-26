@@ -6,13 +6,13 @@ export class AuthApi {
       account: account,
       password: password,
     });
-    sessionStorage.setItem('accessToken', res.data.accessToken);
+    document.cookie = `accessToken=${res.data.accessToken}`;
     return res;
   }
 
   static async logout() {
     const res = axios.get('/auth/logout');
-    sessionStorage.removeItem('accessToken');
+    document.cookie = 'accessToken=; max-age=-1';
 
     return res;
   }

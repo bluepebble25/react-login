@@ -1,12 +1,13 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import { getCookie } from '../../lib/helper/cookie';
 
 interface AuthRouteProps {
   children: React.ReactNode;
 }
 
 function AuthRoute({ children }: AuthRouteProps) {
-  const isAuthed = sessionStorage.getItem('accessToken');
+  const isAuthed = getCookie('accessToken');
   return isAuthed ? <>{children}</> : <Navigate replace to="/" />;
 }
 

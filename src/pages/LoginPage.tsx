@@ -10,6 +10,7 @@ import { ErrorMessage } from '../components/ErrorMessage';
 import { AuthApi } from '../lib/api/auth';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
+import { getCookie } from '../lib/helper/cookie';
 
 function LoginPage() {
   const [loginInfo, setLoginInfo] = useState({ account: '', password: '' });
@@ -17,7 +18,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (sessionStorage.getItem('accessToken')) {
+    if (getCookie('accessToken')) {
       navigate('/userinfo');
     }
   }, [navigate]);
