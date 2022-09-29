@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { AxiosError, AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
+import { ErrorMessage } from '../components/ErrorMessage';
 import { Form } from '../components/Form';
 import { UserInfo } from '../components/UserInfo';
 import { AuthApi } from '../lib/api/auth';
@@ -24,6 +26,7 @@ class UserInfoType {
 
 function UserInfoPage() {
   const [userInfo, setUserInfo] = useState<UserInfoType>();
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,11 +38,15 @@ function UserInfoPage() {
       const res = await AuthApi.getUserInfo();
       setUserInfo(res.data);
     } catch (e) {
-      alert(e);
+      const err = e as AxiosError;
+      const res = err.response as AxiosResponse;
+      const message = res.data.message;
+      setError(message);
     }
   };
 
-  const onSubmit = () => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     AuthApi.logout();
     navigate('/');
   };
@@ -48,16 +55,25 @@ function UserInfoPage() {
     <div className="wrapper" css={loginBackgroundStyle}>
       <Card>
         <Card.Title>User Information</Card.Title>
-        <Form onSubmit={onSubmit}>
-          <UserInfo title="id" value={userInfo && userInfo.id} />
-          <UserInfo title="name" value={userInfo && userInfo.name} />
-          <UserInfo title="account" value={userInfo && userInfo.account} />
-          <UserInfo title="level" value={userInfo && userInfo.level} />
+        {error ? (
+          <Form onSubmit={onSubmit}>
+            <ErrorMessage>{error}</ErrorMessage>
+            <Button type="submit" color="yellow">
+              Back
+            </Button>
+          </Form>
+        ) : (
+          <Form onSubmit={onSubmit}>
+            <UserInfo title="id" value={userInfo && userInfo.id} />
+            <UserInfo title="name" value={userInfo && userInfo.name} />
+            <UserInfo title="account" value={userInfo && userInfo.account} />
+            <UserInfo title="level" value={userInfo && userInfo.level} />
 
-          <Button type="submit" color="yellow">
-            Logout
-          </Button>
-        </Form>
+            <Button type="submit" color="yellow">
+              Logout
+            </Button>
+          </Form>
+        )}
       </Card>
     </div>
   );
